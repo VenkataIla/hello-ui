@@ -19,23 +19,30 @@ docker run -p 8080:8080 hello
 http://localhost:8080/hello
 the result will be : Hello Stakater
 
-### providing access to kubernetes from local - run from normal command editor
+### providing access to kubernetes from local - run from normal command editor if windows operating system else eval $(minikube docker-evn)
 @FOR /f "token=*" %i IN ('minikube -p minikube docker-env') DO @%i
 
-### check cluster information
-kubectl cluster-info
+### to check docker avaialble to access in kuberenetes 
+docker images
+### deploy in to kubernetes
+kubectl apply -f deployment.yaml
+result will be 
+deployment.apps/hello-ui-deployment created
+service/hello-ui-service created
 
-### See pods and deployments
-kubectl get pods
+### service check
+minikube service hello-ui-service
+will open a default browser with ip and port 
 
-kubectl get pods --all-namespaces
+### Verify in kubernetes dashboard deplyments, servcies and pods
+![image](https://user-images.githubusercontent.com/22048283/120287272-bdedbd00-c2dc-11eb-9b97-d9e05a97e7ec.png)
 
-### To create a kubernetes deployment we should run the following command
-kubectl run hello --image=hello:latest --port=8080 --image-pull-policy=Never
+![image](https://user-images.githubusercontent.com/22048283/120287381-d5c54100-c2dc-11eb-80f5-6db6cc52af47.png)
 
-### expose the service
-kubectl expose pod hello --type=NodePort
+### Test API
+![image](https://user-images.githubusercontent.com/22048283/120287663-158c2880-c2dd-11eb-9fdd-35708ec49da7.png)
 
-### after deploying in to kubernetes can see pods
-![img.png](img.png)
+### after hitting api logs
+![image](https://user-images.githubusercontent.com/22048283/120287597-01e0c200-c2dd-11eb-93d4-6b679bbaee2f.png)
+
 
