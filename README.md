@@ -13,9 +13,9 @@ docker images
 you can find
 
 ### Run Docker from local
-docker run -p 8080:8080 hello
+docker run -p 3000:3000 hello-ui
 
-### Test application in local
+### Test the backedn application in local
 http://localhost:8080/hello
 the result will be : Hello Stakater
 
