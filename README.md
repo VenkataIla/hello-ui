@@ -16,8 +16,8 @@ you can find
 docker run -p 3000:3000 hello-ui
 
 ### Test the backedn application in local
-http://localhost:8080/hello
-the result will be : Hello Stakater
+http://localhost:3000
+the result will be : Hello World
 
 ### providing access to kubernetes from local - run from normal command editor if windows operating system else eval $(minikube docker-evn)
 @FOR /f "token=*" %i IN ('minikube -p minikube docker-env') DO @%i
