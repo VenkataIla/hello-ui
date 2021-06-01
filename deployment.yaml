@@ -1,22 +1,36 @@
-apiVersion: apps/v1
+apiVersion: apps/v1 # For versions before 1.9.0 use apps/v1beta2
 kind: Deployment
-metadata:
-  name: hello-ui
-spec:
-  replicas: 1
-  selector:
+metadata:   # Data that helps  uniquely identify the object (using name, UID and namespace)          
+  name: hello-ui-deployment
+spec:  # What state you desire for the object              
+  selector:  # The selector field defines how the deployment finds which pod to manage       
     matchLabels:
-      app: hello-ui
+      app: hello-ui-deployment
+  replicas: 1  # Tells the deployment to run 1 pods matching the template
   template:
     metadata:
-      labels:
-        app: hello-ui
+      labels:  # Labels are used as indentifying attributes for objects such as pods and replication controller.      
+        app: hello-ui-deployment
     spec:
       containers:
-        - name: hello-ui
-          image: hello-ui
+        - name: hello-ui-deployment
+          image: hello-ui:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 3000
-          env:
-            - name: Venkat
-              impagepullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-ui-service
+  labels:
+    name: hello-ui-deployment
+spec:
+  ports:
+    - nodePort: 30170 # make the service available to network requests from external clients
+      port: 3000        # access the service via external port no
+      targetPort: 3000  # port number that container listening on
+      protocol: TCP
+  selector:
+    app: hello-ui-deployment
+  type: NodePort     # which expose the application on a port across a each of your nodes

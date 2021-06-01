@@ -5,7 +5,7 @@ const request = require('request');
 
 // Constants
 const PORT = 3000;
-const HOST = '127.0.0.1';
+const HOST = '0.0.0.0';
 
 // App
 const app = express();
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.get('/hello', (req, res) => {
     let options = {
-        url: "http://localhost:8080/hello",
+        url: "http://192.168.99.101:30171/hello",
         method: 'GET',
         json: true,
         headers: req.defaultHeaders
